@@ -14,7 +14,7 @@ func dataSource() *schema.Resource {
 		Read: dataSourceRead,
 
 		Schema: map[string]*schema.Schema{
-			"body": {
+			"joke": {
 				Type:     schema.TypeString,
 				Computed: true,
 				Elem: &schema.Schema{
@@ -56,7 +56,7 @@ func dataSourceRead(d *schema.ResourceData, meta interface{}) error {
 
 	json.Unmarshal([]byte(string(bytes)), &jokeResponse)
 
-	d.Set("body", jokeResponse.Value)
+	d.Set("joke", jokeResponse.Value)
 	d.SetId(time.Now().UTC().String())
 
 	return nil
