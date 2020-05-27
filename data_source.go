@@ -1,12 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"io/ioutil"
 	"net/http"
 	"time"
-	"encoding/json"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func dataSource() *schema.Resource {
@@ -54,7 +54,7 @@ func dataSourceRead(d *schema.ResourceData, meta interface{}) error {
 
 	jokeResponse := JokeResponse{}
 
-    json.Unmarshal([]byte(string(bytes)), &jokeResponse)
+	json.Unmarshal([]byte(string(bytes)), &jokeResponse)
 
 	d.Set("body", jokeResponse.Value)
 	d.SetId(time.Now().UTC().String())
